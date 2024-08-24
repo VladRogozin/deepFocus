@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Playlist{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="background-color: #00202e; color: #b4d9ec; padding: 20px; border-radius: 8px;">
+    <h1 class="text-center" style="color: #fdd03b;">Edit Playlist: {{ playlist.name }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Список предложений в плейлисте -->
+        <h3 class="text-center" style="color: #b4d9ec;">Sentences</h3>
+        <ul class="list-group mb-3" style="background-color: #00202e; color: #b4d9ec;">
+            {% for sentence in sentences %}
+                <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #b4d9ec; color: #00202e;">
+                    <div>
+                        <input type="checkbox" name="delete_sentences" value="{{ sentence.id }}" style="margin-right: 10px;">
+                        {{ sentence.german_sentence }} - {{ sentence.translation }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Список слов в плейлисте -->
+        <h3 class="text-center" style="color: #b4d9ec;">Words</h3>
+        <ul class="list-group mb-3" style="background-color: #00202e; color: #b4d9ec;">
+            {% for word in words %}
+                <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #b4d9ec; color: #00202e;">
+                    <div>
+                        <input type="checkbox" name="delete_words" value="{{ word.id }}" style="margin-right: 10px;">
+                        {{ word.german_word }} - {{ word.translation }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Кнопки для сохранения изменений и возврата -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn" style="background-color: #cb7f07; color: #fff;">Delete Selected</button>
+            <a href="{% url 'sentences:playlist_list' %}" class="btn" style="background-color: #4a9396; color: #00202e;">Back to Playlist List</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

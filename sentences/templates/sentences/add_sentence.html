@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Add Sentences and Words{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+    <div class="container mt-4" style="max-width: 900px;">
+        <!-- Вкладки для переключения между формами -->
+        <ul class="nav nav-tabs" id="formTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="sentences-tab" data-bs-toggle="tab" href="#sentences" role="tab" aria-controls="sentences" aria-selected="true" style="color:  #4a9396;">Sentences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="words-tab" data-bs-toggle="tab" href="#words" role="tab" aria-controls="words" aria-selected="false" style="color:  #4a9396;">Words</a>
+            </li>
+        </ul>
+
+        <!-- Общая форма для обоих наборов -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="tab-content mt-4" id="formTabsContent">
+                <!-- Sentences Section -->
+                <div class="tab-pane fade show active" id="sentences" role="tabpanel" aria-labelledby="sentences-tab">
+                    <h3 class="text-center" style="color: #b4d9ec;">Sentences</h3>
+                    <div id="sentence-forms" class="mb-5">
+                        {{ sentence_formset.management_form }}
+                        {% for form in sentence_formset %}
+                            <div class="card mb-3" style="background-color: rgba(0, 0, 0, 0.0);">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col mt-2">
+                                            {{ form.german_sentence.label_tag }} {{ form.german_sentence }}
+                                            {% if form.german_sentence.errors %}
+                                                <div class="text-danger">{{ form.german_sentence.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.translation.label_tag }} {{ form.translation }}
+                                            {% if form.translation.errors %}
+                                                <div class="text-danger">{{ form.translation.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.image.label_tag }} {{ form.image }}
+                                            {% if form.image.errors %}
+                                                <div class="text-danger">{{ form.image.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.audio.label_tag }} {{ form.audio }}
+                                            {% if form.audio.errors %}
+                                                <div class="text-danger">{{ form.audio.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.playlist.label_tag }} {{ form.playlist }}
+                                        </div>
+                                        <div class="col-1 d-flex align-items-center ms-auto mt-3">
+                                            <button type="button" class="btn btn-danger btn-sm remove-form">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn" id="add-sentence" style="background-color: #4a9396; color: #00202e;">Add Another Sentence</button>
+                </div>
+
+                <!-- Words Section -->
+                <div class="tab-pane fade" id="words" role="tabpanel" aria-labelledby="words-tab">
+                    <h3 class="text-center" style="color: #b4d9ec;">Words</h3>
+                    <div id="word-forms">
+                        {{ word_formset.management_form }}
+                        {% for form in word_formset %}
+                            <div class="card mb-3" style="background-color: rgba(0, 0, 0, 0.0);">
+                                <div class="card-body">
+                                    <div class="form-row mb-3">
+                                        <div class="col mt-2">
+                                            {{ form.german_word.label_tag }} {{ form.german_word }}
+                                            {% if form.german_word.errors %}
+                                                <div class="text-danger">{{ form.german_word.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.translation.label_tag }} {{ form.translation }}
+                                            {% if form.translation.errors %}
+                                                <div class="text-danger">{{ form.translation.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.image.label_tag }} {{ form.image }}
+                                            {% if form.image.errors %}
+                                                <div class="text-danger">{{ form.image.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.audio.label_tag }} {{ form.audio }}
+                                            {% if form.audio.errors %}
+                                                <div class="text-danger">{{ form.audio.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col mt-2">
+                                            {{ form.playlist.label_tag }} {{ form.playlist }}
+                                        </div>
+                                        <div class="col-1 d-flex align-items-center ms-auto mt-3">
+                                            <button type="button" class="btn btn-danger btn-sm remove-form">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn" id="add-word" style="background-color: #4a9396; color: #00202e;">Add Another Word</button>
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="mt-4 text-center">
+                <button type="submit" class="btn" style="background-color: #fdd03b; color: #00202e; width: 100%;">Save All</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Общие стили для полей формы */
+    input[type="text"], input[type="file"], textarea, select {
+        background-color: #b4d9ec;  /* Светлый цвет фона для полей */
+        color: #00202e;  /* Темный текст */
+        border: 2px solid #4a9396;  /* Средний цвет для границ полей */
+        padding: 10px;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    /* Стили для фокусировки */
+    input[type="text"]:focus, input[type="file"]:focus, textarea:focus, select:focus {
+        border-color: #00202e;  /* Контрастный цвет при фокусе */
+        box-shadow: 0 0 5px #b4d9ec;
+        outline: none;
+    }
+
+    /* Стили для меток полей */
+    label {
+        color: #4a9396;
+        font-weight: bold;
+    }
+
+</style>
+<script>
+    // Добавление новых форм для предложений
+    document.getElementById('add-sentence').addEventListener('click', function() {
+        let sentenceForms = document.getElementById('sentence-forms');
+        let totalForms = document.querySelector('#id_sentences-TOTAL_FORMS');
+        let currentCount = parseInt(totalForms.value);
+
+        let newForm = sentenceForms.children[sentenceForms.children.length - 1].cloneNode(true);  // Клонируем последнюю форму
+        let regex = new RegExp(`sentences-${currentCount - 1}`, 'g');
+        newForm.innerHTML = newForm.innerHTML.replace(regex, `sentences-${currentCount}`);
+        sentenceForms.appendChild(newForm);
+        totalForms.value = currentCount + 1;
+
+        // Добавляем обработчик удаления для новой формы
+        newForm.querySelector('.remove-form').addEventListener('click', function() {
+            newForm.remove();
+            totalForms.value = parseInt(totalForms.value) - 1;
+        });
+    });
+
+    // Добавление новых форм для слов
+    document.getElementById('add-word').addEventListener('click', function() {
+        let wordForms = document.getElementById('word-forms');
+        let totalForms = document.querySelector('#id_words-TOTAL_FORMS');
+        let currentCount = parseInt(totalForms.value);
+
+        let newForm = wordForms.children[wordForms.children.length - 1].cloneNode(true);  // Клонируем последнюю форму
+        let regex = new RegExp(`words-${currentCount - 1}`, 'g');
+        newForm.innerHTML = newForm.innerHTML.replace(regex, `words-${currentCount}`);
+        wordForms.appendChild(newForm);
+        totalForms.value = currentCount + 1;
+
+        // Добавляем обработчик удаления для новой формы
+        newForm.querySelector('.remove-form').addEventListener('click', function() {
+            newForm.remove();
+            totalForms.value = parseInt(totalForms.value) - 1;
+        });
+    });
+
+    // Обработчик удаления существующих форм
+    document.querySelectorAll('.remove-form').forEach(function(button) {
+        button.addEventListener('click', function() {
+            let form = button.closest('.card');
+            form.remove();
+            let totalForms = document.querySelector(button.closest('#sentence-forms') ? '#id_sentences-TOTAL_FORMS' : '#id_words-TOTAL_FORMS');
+            totalForms.value = parseInt(totalForms.value) - 1;
+        });
+    });
+</script>
+{% endblock %}

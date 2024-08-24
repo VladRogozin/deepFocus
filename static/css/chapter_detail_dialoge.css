@@ -1,0 +1,166 @@
+.dialogue-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+
+.chat-message {
+  padding: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-message-story .chat-content {
+  background-color: #f7e1d7;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.chat-image {
+  flex-shrink: 0;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10%;
+}
+
+.chat-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  background-color: #d9ecfa;
+  border-radius: 40px;
+  padding: 10px;
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.chat-audio {
+  flex-shrink: 0;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.play-pause {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.play-pause .play-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.chat-text {
+  flex-grow: 1;
+}
+
+.chat-text p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.translation {
+  display: none;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #888;
+}
+
+.toggle-translation {
+    all: unset; /* Удаляет все встроенные браузерные стили */
+    display: inline-block; /* Задает стандартное поведение кнопки */
+    cursor: pointer; /* Изменяет курсор на указатель */
+    padding: 0; /* Убирает внутренние отступы */
+    border: none; /* Убирает границу */
+    background: none; /* Убирает фоновый цвет */
+    font: inherit; /* Наследует шрифт от родителя */
+    color: inherit; /* Наследует цвет текста от родителя */
+    text-align: inherit; /* Наследует выравнивание текста от родителя */
+    outline: none; /* Убирает обводку при фокусе */
+}
+
+
+.toggle-translation {
+  display: inline-block;
+  color: #888;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.toggle-translation:hover {
+  background-color: #ccc;
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    padding: 10px;
+  }
+  .chat-audio {
+    margin-left: 0px;
+  }
+
+  .chapter-title {
+    font-size: 24px;
+  }
+
+  .chapter-description {
+    font-size: 14px;
+  }
+
+  .dialogue-title {
+    font-size: 18px;
+  }
+
+  .chat-image img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .chat-content {
+    padding: 10px;
+  }
+
+  .play-pause .play-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .chat-text p {
+    font-size: 16px;
+  }
+
+  .translation {
+    font-size: 12px;
+  }
+
+  .toggle-translation {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+  }
+}

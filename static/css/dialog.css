@@ -1,0 +1,65 @@
+
+.my-container {
+    padding: 15px; /* Уменьшенные отступы */
+    max-width: 80%; /* Уменьшенная максимальная ширина контейнера */
+    margin: 0 auto; /* Центрируем контейнер */
+}
+
+/* Заголовок страницы */
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Стили для карточек */
+.chapter-card {
+    background: #ffffff; /* Белый фон для карточек */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для карточек */
+    transition: transform 0.3s, box-shadow 0.3s; /* Плавные переходы для тени и трансформации */
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05); /* Полупрозрачный налет */
+    z-index: 1;
+}
+
+.chapter-card .card-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.chapter-card:hover {
+    transform: translateY(-5px); /* Поднимаем карточку при наведении */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
+}
+
+/* Цвета для каждой карточки */
+.chapter-card:nth-child(odd) {
+    background: #e3f2fd; /* Легкий голубой оттенок */
+}
+
+.chapter-card:nth-child(even) {
+    background: #fce4ec; /* Легкий розовый оттенок */
+}
+
+/* Кнопка Подробнее */
+.btn-primary {
+    background-color: #007bff; /* Цвет кнопки */
+    border-color: #007bff; /* Цвет границы кнопки */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Темнее цвет при наведении */
+    border-color: #004085; /* Темнее цвет границы при наведении */
+}

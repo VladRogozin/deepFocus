@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Map</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chapter {
+            width: 60%;
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            position: relative;
+            background-color: #fff;
+        }
+        .chapter.left {
+            margin-left: 0;
+            text-align: left;
+        }
+        .chapter.right {
+            margin-left: auto;
+            text-align: right;
+        }
+        .connector {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            margin: 0 auto;
+        }
+        .connector:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            border-left: 2px dashed #ccc;
+            transform: translateX(-50%);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for chapter in chapters %}
+            <div class="chapter {% if forloop.counter0|divisibleby:2 %}left{% else %}right{% endif %}">
+                <h3>{{ chapter.title }}</h3>
+                <p>{{ chapter.description }}</p>
+                <p>{{ chapter.gram_description }}</p>
+                {% if chapter.image %}
+                    <img src="{{ chapter.image.url }}" alt="{{ chapter.title }}" class="img-fluid">
+                {% endif %}
+            </div>
+            {% if not forloop.last %}
+                <div class="connector"></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

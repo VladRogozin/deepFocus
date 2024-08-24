@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Add Playlist{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+    <div class="text-center" style="width: 100%; max-width: 400px;">
+        <h1 style="color: #b4d9ec; margin-bottom: 60px;">Add Playlist</h1>
+        <form method="post" style="background-color: #00202e; padding: 20px; border-radius: 8px;">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn" style="background-color: #4a9396; color: #00202e; width: 100%;">Add Playlist</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Стили для полей формы */
+    input[type="text"], input[type="email"], textarea, select {
+        background-color: #b4d9ec;  /* Светлый цвет фона для полей */
+        color: #00202e;  /* Темный текст */
+        border: 2px solid #4a9396;  /* Средний цвет для границ полей */
+        padding: 10px;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    /* Стили для меток */
+    label {
+        color: #b4d9ec;  /* Цвет текста меток */
+    }
+
+    /* Фокус на полях */
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+        border-color: #fdd03b;  /* Контрастный цвет при фокусе */
+        box-shadow: 0 0 5px #fdd03b;
+        outline: none;
+    }
+</style>
+{% endblock %}

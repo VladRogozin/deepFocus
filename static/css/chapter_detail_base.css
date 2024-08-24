@@ -1,0 +1,62 @@
+.content-header {
+    opacity: 0; /* Начальное состояние невидимо */
+    transition: opacity 1s ease-in-out; /* Плавное изменение прозрачности */
+    text-align: center; /* Центрирование текста */
+    margin-bottom: 20px; /* Отступ снизу для разделения с другими элементами */
+  }
+
+.content-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.chapter-title {
+  font-family: "Zain", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 60px;
+  color: #02db97;
+  margin-bottom: 10px;
+
+}
+.chapter-description {
+  font-family: "Zain", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 10px;
+  color: #a9e9f5;
+  margin-bottom: 20px;
+}
+   .end-message {
+    display: none; /* Изначально скрываем элемент */
+    position: fixed; /* Фиксированное позиционирование относительно окна просмотра */
+    bottom: 20px; /* Расстояние от нижнего края экрана */
+    left: 50%; /* Позиционирование по горизонтали относительно центра */
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    text-align: center; /* Центрирование содержимого по горизонтали */
+    padding: 10px; /* Внутренние отступы */
+    z-index: 1000; /* Обеспечивает, что элемент будет поверх других */
+  }
+
+  .end-message img {
+    max-width: 100px; /* Максимальная ширина изображения */
+    height: auto; /* Сохранение пропорций изображения */
+  }
+.chat-container {
+  font-family: "Zain", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 40px;
+  padding: 30px;
+  margin-top: 50px;
+  color: #024366;
+}
+
+@media (max-width: 480px) {
+    .chapter-title {
+      font-size: 40px;
+
+    }
+}
+
+}

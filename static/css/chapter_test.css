@@ -1,0 +1,52 @@
+  .custom-card {
+    max-width: 300px; /* Уменьшить размер блока */
+    margin: 0 auto; /* Центрировать блок */
+    background: none; /* Убрать фон карточки */
+    border: none; /* Убрать границу карточки */
+  }
+  .custom-card .card-header {
+    background: none; /* Убрать фон заголовка карточки */
+    border-bottom: none; /* Убрать границу внизу заголовка */
+  }
+  .custom-card .card-body {
+    padding: 0.5rem; /* Уменьшить отступы внутри карточки */
+  }
+  .custom-card h3 {
+    color: #031066;
+    margin-bottom: 0; /* Убрать отступ снизу */
+  }
+  .custom-card .form-check {
+    margin-bottom: 0.0rem; /* Отступы между элементами */
+  }
+  .custom-card .form-check-input {
+    display: none; /* Скрыть стандартные радио-кнопки */
+  }
+  .custom-card .form-check-label {
+    display: inline-block;/* Сделать метки блочными элементами */
+    cursor: pointer; /* Изменить курсор при наведении */
+    padding: 0rem  1rem 0rem 0.4rem; /* Добавить отступы для кликабельности */
+    border: 2px solid #5d617a; /* Начальная прозрачная граница */
+    border-radius: 8px; /* Радиус для закругления углов */
+    font-size: 1.1rem; /* Уменьшить размер текста */
+  }
+  .custom-card .form-check-input:checked + .form-check-label {
+    border-color: #747999; /* Цвет бордера для выбранного варианта */
+    background-color: #71de89; /* Фон для выбранного варианта */
+  }
+
+.wide-card {
+  width: 100%; /* Увеличение ширины до 100% от родительского контейнера */
+  max-width: 500px; /* Максимальная ширина для ограничения */
+  margin: 0 auto; /* Центрирование карточки */
+}
+
+.test-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 3s ease-out, transform 1s ease-out;
+}
+
+.test-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}

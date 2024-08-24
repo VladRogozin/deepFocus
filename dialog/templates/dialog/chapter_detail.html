@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Chapter{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1 class="chapter-title"></h1>
+    <p class="chapter-description"></p>
+</div>
+
+<div class="chat-container"></div>
+<button class="continue-btn" id="continue-btn" style="display: none;">Weiter...</button>
+
+<script  type="module" src="{% static 'js/chapter_detail.js' %}"></script>
+
+<div class="end-message" id="end-message">
+  <img src="{% static 'img/the-end.png' %}" alt="Das Ende">
+</div>
+{% endblock %}
+
+

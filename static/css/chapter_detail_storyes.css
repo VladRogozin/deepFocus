@@ -1,0 +1,131 @@
+.chat-message-story {
+  display: flex;
+  justify-content: center; /* Центрирование элемента */
+  align-items: center;
+  background-color: #f7e1d7; /* Светлый фон для истории */
+  border-radius: 20px;
+  padding: 20px;
+  width: 60%; /* Установите ширину для центрирования */
+  margin: 30px auto; /* Центрирование на экране */
+}
+
+.story-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравнивание по левому краю */
+  padding: 10px;
+  width: 90%; /* Занимает 60% ширины истории */
+}
+
+.text-button-container {
+  display: flex;
+  flex-direction: row; /* Выравнивание текста и кнопки по горизонтали */
+  align-items: center; /* Вертикальное выравнивание по центру */
+  width: 100%;
+}
+
+.story-audio {
+  display: flex;
+  align-items: center;
+  margin-top: 5px; /* Отступ сверху для аудио */
+}
+
+.story-play-pause {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px; /* Расстояние между кнопкой воспроизведения и переводом */
+}
+
+.story-play-pause .play-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.story-text {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 5px; /* Отступ снизу для текста */
+  flex-grow: 1; /* Позволяет тексту занимать все доступное пространство */
+}
+
+.translation {
+  display: none; /* Скрытый перевод по умолчанию */
+  margin-left: 10px;
+  font-size: 14px;
+  color: #888;
+}
+
+.toggle-translation {
+  background-color: transparent;
+  border: none;
+  color: #007bff; /* Цвет кнопки */
+  cursor: pointer;
+  font-size: 18px; /* Размер шрифта */
+  margin-left: 10px; /* Расстояние между кнопкой перевода и текстом */
+  padding: 0; /* Убираем padding */
+  transition: color 0.2s ease-in-out;
+}
+
+.toggle-translation:hover {
+  color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+.story-image {
+  flex-shrink: 0;
+  margin-left: 5px; /* Расстояние между текстом и изображением */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%; /* Занимает 40% ширины истории */
+}
+
+.story-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10%; /* Округление изображения */
+}
+
+@media (max-width: 480px) {
+  .chat-message-story {
+    flex-direction: column; /* Изменение направления на колонку для мобильных */
+    width: 100%; /* На мобильных устройствах ширина 100% */
+    padding: 15px;
+  }
+
+  .story-content {
+    width: 100%; /* На мобильных устройствах ширина 100% */
+    margin-bottom: 15px; /* Отступ снизу для мобильных */
+  }
+
+  .story-image {
+    width: 40%; /* На мобильных устройствах ширина 100% */
+    margin-left: 0; /* Убираем отступы на мобильных */
+    margin-bottom: 15px; /* Отступ снизу для мобильных */
+  }
+
+  .story-image img {
+    border-radius: 20%; /* Сохранение округления для мобильных */
+  }
+
+  .story-audio {
+    margin-top: 10px;
+  }
+
+  .story-play-pause .play-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .story-text {
+    font-size: 16px;
+  }
+
+  .translation {
+    font-size: 12px;
+  }
+
+  .toggle-translation {
+    font-size: 12px;
+  }
+}

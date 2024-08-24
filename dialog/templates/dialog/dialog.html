@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Chapters{% endblock %}
+
+{% block content %}
+<div class="my-container">
+    <div class="row mt-5">
+        {% for chapter in chapters %}
+            <div class="col-md-3 col-sm-4 mb-4"> <!-- Уменьшите ширину колонки для уменьшения карточек -->
+                <div class="card chapter-card">
+                    {% if chapter.image %}
+                        <img src="{{ chapter.image.url }}" class="card-img-top chapter-img" alt="{{ chapter.title }}">
+                    {% else %}
+
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ chapter.title }}</h5>
+                        {% if chapter.description %}
+                            <p class="card-text">{{ chapter.description|slice:":50" }}{% if chapter.description|length > 50 %}...{% endif %}</p>
+                        {% else %}
+                            <p class="card-text text-muted">Описание отсутствует</p>
+                        {% endif %}
+                        {% if chapter.gram_description %}
+                            <p class="card-text"><small class="text-muted">{{ chapter.gram_description|slice:":50" }}{% if chapter.gram_description|length > 50 %}...{% endif %}</small></p>
+                        {% endif %}
+                        <a href="{% url 'dialog:chapter_detail' chapter.id %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
+
