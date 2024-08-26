@@ -110,7 +110,7 @@ def game(request, playlist_id):
 
     # Добавляем предложения
     for sentence in sentences:
-        if random.randint(1, 10) % 2 == 0 or not sentence.audio:
+        if random.randint(1, 10) <= 7 or not sentence.audio:
             elements.append({
                 'type': 'sentence_order',
                 'german_sentence': sentence.german_sentence,
@@ -119,7 +119,7 @@ def game(request, playlist_id):
                 'image': sentence.image.url if sentence.image else None
             })
 
-        if sentence.audio:
+        if random.randint(1, 10) <= 2 and sentence.audio:
             elements.append({
                 'type': 'audio_sentence',
                 'german_sentence': sentence.german_sentence,
