@@ -1,0 +1,632 @@
+{% extends "base.html" %}
+    {% load static %}
+
+{% block title %}{{ mix.title }}{% endblock %}
+
+{% block content %}
+<style>
+/* Основные стили для аудиоплеера */
+.audio-player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+            background-color: rgba(26, 41, 2, 0.4);
+    padding: 20px;
+    border-radius: 40px;
+
+    width: 100%;
+    max-width: 270px;
+    margin: 20px auto; /* Центрирование на странице */
+}
+
+.track-info {
+
+}
+
+.track-title {
+    color: #dcebc7;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.control-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.player-btn {
+    background-color: #284203; /* Темно-зелёный цвет */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.player-btn:hover {
+    background-color: #6c824e; /* Более светлый зеленый при наведении */
+}
+
+.player-btn:active {
+    transform: scale(0.95); /* Легкий эффект нажатия */
+}
+
+
+
+    /* Контейнер для табов и чата */
+    .tab-and-chat-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+    }
+
+    /* Таб контейнер */
+    .tab-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .chat-container {
+        padding: 0;
+        margin-top: 0;
+    }
+
+    /* Комната чата */
+    .room-info {
+
+            background-color: rgba(26, 41, 2, 0.4);
+        width: 100%;
+        max-width: 400px; /* Уменьшите максимальную ширину окна чата */
+        height: 300px; /* Уменьшите высоту окна чата */
+        overflow-y: auto;
+        display: none;
+        border-radius: 15px;
+    }
+
+    /* Сообщения в чате */
+    .messages {
+
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.0);
+        font-size: 10px; /* Уменьшите размер шрифта сообщений */
+        padding: 10px; /* Уменьшите отступы внутри чата */
+    }
+
+.custom-btn {
+    background-color: #284203; /* Темно-зелёный цвет фона */
+    color: #ffffff; /* Белый цвет текста */
+    border: 2px solid #1d3002; /* Темный зеленый цвет границы */
+    border-radius: 15px; /* Радиус скругления углов */
+    padding: 5px 10px; /* Внутренние отступы */
+    font-size: 10px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    cursor: pointer; /* Изменение курсора при наведении */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Плавные переходы для фона и эффекта нажатия */
+}
+
+.custom-btn:hover {
+    background-color: #6c824e; /* Более темный зеленый цвет при наведении */
+}
+
+.custom-btn:active {
+    transform: scale(0.95); /* Легкий эффект нажатия */
+}
+
+.custom-btn:focus {
+    outline: none; /* Убираем стандартную обводку при фокусе */
+    box-shadow: 0 0 5px #004d00; /* Добавляем тень при фокусе */
+}
+
+
+
+
+
+.custom-scrollbar {
+    overflow-y: scroll; /* Включаем прокрутку по вертикали */
+}
+
+/* Скрываем scrollbar по умолчанию */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.custom-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Показываем scrollbar при наведении на контейнер */
+.custom-scrollbar:hover::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar:hover {
+    scrollbar-width: thin; /* Firefox */
+}
+
+/* Стили для видимого scrollbar'а */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет ползунка */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#toggleNavbar {
+font-size: 10px;
+    position: fixed;
+    top: 90px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #284203; /* Темно-зеленый цвет */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+#toggleNavbar:hover {
+    background-color: #6c824e; /* Светлее при наведении */
+}
+
+
+.timer-container {
+    margin-top: 20px;
+
+}
+
+#timerDisplay {
+    font-size: 2rem;
+
+
+}
+
+#startTimer {
+    margin-top: 10px;
+}
+
+.break-time {
+    color: #81BECE; /* Пастельно-голубой цвет */
+}
+
+.work-time {
+    color: #E8EDE7; /* Основной цвет для рабочего времени */
+
+
+}
+.timer-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(26, 41, 2, 0.6); /* Полупрозрачный фон */
+    border: 2px solid #6c824e; /* Граница с цветом */
+    border-radius: 45px; /* Скругленные углы */
+    display: inline-block; /* Контейнер не занимает всю ширину */
+    text-align: center; /* Центрирование текста внутри контейнера */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.room-description {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100%;
+    max-width: 700px; /* Максимальная ширина для адаптивности */
+    padding: 10px 20px; /* Отступы внутри блока */
+    background-color: rgba(26, 41, 2, 0.4);
+    color: #ffffff; /* Белый цвет текста */
+    border-radius: 10px; /* Скругленные углы */
+    text-align: center; /* Текст по центру */
+    font-size: 0.8rem; /* Размер шрифта */
+    z-index: 1000; /* Поверх других элементов */
+}
+
+@media (max-width: 768px) {
+    .room-description {
+        width: 90%; /* Адаптивная ширина для маленьких экранов */
+        font-size: 0.7rem; /* Немного уменьшаем размер шрифта на маленьких экранах */
+        right: 10px; /* Уменьшаем отступ справа на маленьких экранах */
+        bottom: 10px; /* Уменьшаем отступ снизу на маленьких экранах */
+    }
+}
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .tab-and-chat-container {
+            align-items: center;
+        }
+
+        .room-info {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- Используем Bootstrap -->
+<!-- Используем Bootstrap -->
+<div>
+    <button id="toggleNavbar" class="btn btn-primary">Toggle Navbar</button>
+
+    <!-- Добавляем вывод описания комнаты -->
+    <div id="roomDescription" class="room-description">{{ rooms.first.description }}</div>
+
+    <!-- Аудиоплеер -->
+    <div class="audio-player">
+        <div class="track-info">
+            <div id="trackTitle" class="track-title">Track 1</div>
+        </div>
+        <div class="player-controls">
+            <button id="prevTrack" class="btn player-btn">
+                <img src="{% static 'img/rewind.svg' %}" alt="Rewind" class="control-icon">
+            </button>
+            <button id="playPause" class="btn player-btn">
+                <img id="playPauseIcon" src="{% static 'img/play.svg' %}" alt="Play" class="control-icon">
+            </button>
+            <button id="nextTrack" class="btn player-btn">
+                <img src="{% static 'img/forward.svg' %}" alt="Forward" class="control-icon">
+            </button>
+        </div>
+        <audio id="audioPlayer" class="audio-element">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="timer-container text-center">
+        <h2 id="timerDisplay" class="work-time">30:00</h2>
+        <button id="startTimer" class="btn custom-btn">Start Timer</button>
+    </div>
+
+    <!-- Таб контейнер для комнат и чата -->
+    <div class="tab-and-chat-container">
+        <div class="tab-container">
+            {% for room in rooms %}
+            <button class="tab custom-btn m-1"
+                    data-room-id="{{ room.id }}"
+                    data-room-image="{% if room.image %}{{ room.image.url }}{% else %}''{% endif %}"
+                    data-room-description="{{ room.description }}"
+                    data-dialogues='{% for dialogue in room.dialogue_set.all %}{{ dialogue.id }}:{% for message in dialogue.message_set.all %}{{ message.name }}: {{ message.message }}{% if not forloop.last %}|{% endif %}{% endfor %}{% if not forloop.last %};{% endif %}{% endfor %}'>
+                {{ forloop.counter }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <div id="roomsContainer" class="chat-container">
+            {% for room in rooms %}
+            <div id="room-{{ room.id }}" class="room-info p-2">
+                <div class="messages" id="messages-{{ room.id }}">
+                    <!-- Сообщения для этой комнаты будут появляться здесь -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+// Находим все табы (кнопки)
+const tabs = document.querySelectorAll('.tab');
+const roomsContainer = document.getElementById('roomsContainer');
+const roomDescriptionElement = document.getElementById('roomDescription');
+let roomHistories = {};
+let timers = {};
+
+// Функция для отображения выбранной комнаты
+function showRoom(roomId, roomImage, roomDescription) {
+    // Скрываем все комнаты
+    const rooms = document.querySelectorAll('.room-info');
+    rooms.forEach(room => {
+        room.style.display = 'none';
+    });
+
+    // Показываем выбранную комнату
+    const currentRoom = document.getElementById(`room-${roomId}`);
+    currentRoom.style.display = 'block';
+
+    // Обновляем описание комнаты
+    roomDescriptionElement.textContent = roomDescription;
+
+    // Меняем фоновое изображение
+    const bodyElement = document.body;
+    if (roomImage) {
+        bodyElement.style.backgroundImage = `url('${roomImage}')`;
+        bodyElement.style.backgroundSize = 'cover'; // Изображение заполняет весь экран
+        bodyElement.style.backgroundPosition = 'center'; // Центрирование изображения
+        bodyElement.style.backgroundRepeat = 'no-repeat'; // Изображение не повторяется
+    } else {
+        bodyElement.style.backgroundImage = '';  // Если изображения нет, убираем фон
+    }
+}
+
+// Определяем объект для хранения стилей для каждого имени
+const nameStyles = {};
+
+// Определяем доступные цвета
+const availableColors = ['#AEC670', '#F1BAA1', '#8B9D77', '#81BECE', '#D39CBD', '#EDC5AB', '#E0D5BE'];
+let colorIndex = 0;
+
+function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function getRandomDelay(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomIndex(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function showMessagesForRoom(roomId, dialoguesData) {
+    const messagesContainer = document.getElementById(`messages-${roomId}`);
+    messagesContainer.classList.add('custom-scrollbar');
+
+    if (!roomHistories[roomId]) {
+        roomHistories[roomId] = {
+            dialogues: dialoguesData.split(';'),
+            messagesShown: []
+        };
+    }
+
+    const roomData = roomHistories[roomId];
+    const dialogues = roomData.dialogues;
+
+    function showNextMessage() {
+        if (dialogues.length === 0) {
+            return;
+        }
+
+        roomData.messageIndex = getRandomIndex(dialogues.length);
+
+        let dialogueMessages = dialogues[roomData.messageIndex].split('|');
+        let idx = 0;
+
+        function showMessage() {
+            if (idx < dialogueMessages.length) {
+                const [name, message] = dialogueMessages[idx].split(': ', 2);
+
+                if (!nameStyles[name]) {
+                    const backgroundColor = hexToRgba(availableColors[colorIndex % availableColors.length], 0.6);
+                    const borderColor = availableColors[colorIndex % availableColors.length];
+                    nameStyles[name] = {
+                        backgroundColor,
+                        borderColor,
+                    };
+                    colorIndex++;
+                }
+
+                const { backgroundColor, borderColor } = nameStyles[name];
+
+                const messageHTML = `
+                    <div class="mb-2 p-1" style="background-color: ${backgroundColor}; border: 2px solid ${borderColor}; border-radius: 15px;">
+                        <div class="p-1" style="font-size: 14px; font-weight: bold; color: #E8E1DB;">
+                            ${name}:
+                        </div>
+                        <div class="p-1" style="font-size: 10px; color: #E8E1DB;">
+                            ${message}
+                        </div>
+                    </div>
+                `;
+
+                messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                roomData.messagesShown.push(dialogueMessages[idx]);
+                idx++;
+
+                const delay = getRandomDelay(3000, 6000);
+
+                timers[roomId] = setTimeout(showMessage, delay);
+            } else {
+                timers[roomId] = setTimeout(showNextMessage, 11000);
+            }
+        }
+
+        showMessage();
+    }
+
+    if (!timers[roomId]) {
+        showNextMessage();
+    }
+}
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+        const roomId = tab.getAttribute('data-room-id');
+        const roomImage = tab.getAttribute('data-room-image');
+        const roomDescription = tab.getAttribute('data-room-description');
+        const dialoguesData = tab.getAttribute('data-dialogues');
+
+        console.log(`Room ID: ${roomId}, Image: ${roomImage}, Description: ${roomDescription}`);
+
+        showRoom(roomId, roomImage, roomDescription);
+        showMessagesForRoom(roomId, dialoguesData);
+
+    });
+});
+
+// Автоматически показываем первую комнату при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    if (tabs.length > 0) {
+        const firstTab = tabs[0];
+        const firstRoomId = firstTab.getAttribute('data-room-id');
+        const firstRoomImage = firstTab.getAttribute('data-room-image');
+        const firstRoomDescription = firstTab.getAttribute('data-room-description'); // Получаем описание первой комнаты
+        const firstDialoguesData = firstTab.getAttribute('data-dialogues');
+
+        // Показываем первую комнату
+        showRoom(firstRoomId, firstRoomImage, firstRoomDescription);
+        showMessagesForRoom(firstRoomId, firstDialoguesData);
+    }
+});
+</script>
+
+<script>
+const audioPlayer = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPause');
+const playPauseIcon = document.getElementById('playPauseIcon'); // Иконка для Play/Pause
+const prevTrackBtn = document.getElementById('prevTrack');
+const nextTrackBtn = document.getElementById('nextTrack');
+const trackTitle = document.getElementById('trackTitle');
+
+const tracks = [
+    {% for audio in audios %}
+    {
+        title: "{{ audio.name }}",
+        url: "{{ audio.audio.url }}"
+    },
+    {% endfor %}
+];
+
+let currentTrackIndex = 0;
+
+// Функция для переключения трека
+function loadTrack(index) {
+    if (index >= 0 && index < tracks.length) {
+        const track = tracks[index];
+        audioPlayer.src = track.url;
+        audioPlayer.load();
+        audioPlayer.play();
+        playPauseIcon.src = "{% static 'img/pause.svg' %}"; // Меняем иконку на паузу
+        trackTitle.textContent = track.title; // Обновляем название трека
+    }
+}
+
+playPauseBtn.addEventListener('click', function () {
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseIcon.src = "{% static 'img/pause.svg' %}"; // Меняем иконку на паузу
+    } else {
+        audioPlayer.pause();
+        playPauseIcon.src = "{% static 'img/play.svg' %}"; // Меняем иконку на воспроизведение
+    }
+});
+
+nextTrackBtn.addEventListener('click', function () {
+    currentTrackIndex++;
+    if (currentTrackIndex >= tracks.length) {
+        currentTrackIndex = 0;
+    }
+    loadTrack(currentTrackIndex);
+});
+
+prevTrackBtn.addEventListener('click', function () {
+    currentTrackIndex--;
+    if (currentTrackIndex < 0) {
+        currentTrackIndex = tracks.length - 1;
+    }
+    loadTrack(currentTrackIndex);
+});
+
+// Добавляем событие, которое запускает следующий трек после завершения текущего
+audioPlayer.addEventListener('ended', function () {
+    currentTrackIndex++;
+    if (currentTrackIndex >= tracks.length) {
+        currentTrackIndex = 0; // Зацикливаемся на первом треке после последнего
+    }
+    loadTrack(currentTrackIndex);
+});
+
+// Изначально загружаем первый трек
+loadTrack(currentTrackIndex);
+
+</script>
+
+    <script>
+        const toggleNavbarBtn = document.getElementById('toggleNavbar');
+        const navbar = document.querySelector('.navbar');
+
+        toggleNavbarBtn.addEventListener('click', function () {
+            if (navbar.style.display === 'none') {
+                navbar.style.display = 'flex';
+                toggleNavbarBtn.textContent = 'Hide Navbar';
+            } else {
+                navbar.style.display = 'none';
+                toggleNavbarBtn.textContent = 'Show Navbar';
+            }
+        });
+
+        if (navbar.style.display === 'none') {
+            toggleNavbarBtn.textContent = 'Show Navbar';
+        } else {
+            toggleNavbarBtn.textContent = 'Hide Navbar';
+        }
+    </script>
+
+
+<script>
+const startTimerBtn = document.getElementById('startTimer');
+const timerDisplay = document.getElementById('timerDisplay');
+let workDuration = 30 * 60;
+let breakDuration = 10 * 60;
+let isWorkTime = true;
+let timer;
+
+const workSound = new Audio("{% static 'audio/start.mp3' %}");
+const breakSound = new Audio("{% static 'audio/start.mp3' %}");
+
+function updateTimerDisplay(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    // Изменяем цвет текста в зависимости от того, идет ли рабочее время или перерыв
+    if (isWorkTime) {
+        console.log('Work time: applying work-time class');
+        timerDisplay.classList.remove('break-time');
+        timerDisplay.classList.add('work-time');
+    } else {
+        console.log('Break time: applying break-time class');
+        timerDisplay.classList.remove('work-time');
+        timerDisplay.classList.add('break-time');
+    }
+}
+
+
+function startTimer() {
+    let time = isWorkTime ? workDuration : breakDuration;
+    updateTimerDisplay(time);
+    timer = setInterval(() => {
+        time--;
+        updateTimerDisplay(time);
+
+        if (time <= 0) {
+            clearInterval(timer);
+            isWorkTime = !isWorkTime;
+            if (isWorkTime) {
+                workSound.play();
+            } else {
+                breakSound.play();
+            }
+            startTimer();
+        }
+    }, 1000);
+}
+
+startTimerBtn.addEventListener('click', function () {
+    startTimer();
+    startTimerBtn.disabled = true;
+});
+
+updateTimerDisplay(workDuration);
+
+</script>
+
+{% endblock %}

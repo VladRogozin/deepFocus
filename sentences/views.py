@@ -105,7 +105,6 @@ def game(request, playlist_id):
     if not sentences and not words:
         return render(request, 'sentences/game.html', {'error': 'No elements in this playlist'})
 
-    # Собираем данные для предложений и слов с указанием их типа
     elements = []
 
     # Добавляем предложения
@@ -119,7 +118,7 @@ def game(request, playlist_id):
                 'image': sentence.image.url if sentence.image else None
             })
 
-        if random.randint(1, 10) <= 2 and sentence.audio:
+        if random.randint(1, 10) <= 10 and sentence.audio:
             elements.append({
                 'type': 'audio_sentence',
                 'german_sentence': sentence.german_sentence,
@@ -157,7 +156,6 @@ def game(request, playlist_id):
                 'image': word.image.url if word.image else None
             })
 
-    # Перемешиваем элементы для случайного порядка
     random.shuffle(elements)
 
     return render(request, 'sentences/game.html', {

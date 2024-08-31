@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Mix List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center my-4">List of Mixes</h1>
+    <div class="row">
+        {% for mix in mixes %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm" style="background-color: #284203; border: none;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #dcebc7;">{{ mix.title }}</h5>
+                    <a href="{% url 'lofi:mix_detail' mix.id %}" class="btn" style="background-color: #6c824e; color: white;">Play</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
