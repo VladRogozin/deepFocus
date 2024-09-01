@@ -40,3 +40,23 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.name}: {self.message[:50]}'
+
+
+class Character(models.Model):
+    audio = models.FileField(upload_to='audio/lofi/character', blank=True, null=True)
+    image = models.ImageField(upload_to='images/lofi/character', blank=True, null=True)
+    name = models.CharField(max_length=200)
+    message = models.TextField()
+    room = models.ForeignKey(MixRoom, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name}: {self.name}'
+
+
+class QuestionAnswer(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+    character = models.ForeignKey(Character, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.question}: {self.question}'

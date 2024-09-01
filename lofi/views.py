@@ -1,7 +1,7 @@
 import json
 
 from django.shortcuts import render, get_object_or_404
-from .models import Mix, MixRoom, MixAudio, Dialogue, Message
+from .models import Mix, MixRoom, MixAudio, Dialogue, Message, Character
 
 
 def mix_list(request):
@@ -22,6 +22,9 @@ def mix_detail(request, mix_id):
 
     # Получаем все комнаты, связанные с миксом
     rooms = MixRoom.objects.filter(mix=mix)
+
+    # Получаем всех персонажей, связанных с этими комнатами
+    characters = Character.objects.filter(room__in=rooms)
 
     # Сериализуем данные о комнатах для JSON
     rooms_data = []
@@ -51,4 +54,5 @@ def mix_detail(request, mix_id):
         'audios': audios,
         'rooms': rooms,  # Передаем список объектов MixRoom в шаблон
         'rooms_json': rooms_json,  # Передаем также JSON данные
+        'characters': characters,  # Передаем всех персонажей, связанных с комнатами
     })

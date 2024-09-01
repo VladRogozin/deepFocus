@@ -1,0 +1,373 @@
+/* Основные стили для аудиоплеера */
+.audio-player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+            background-color: rgba(26, 41, 2, 0.4);
+    padding: 20px;
+    border-radius: 40px;
+
+    width: 100%;
+    max-width: 270px;
+    margin: 20px auto; /* Центрирование на странице */
+}
+
+.track-info {
+
+}
+
+.track-title {
+    color: #dcebc7;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.control-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.player-btn {
+    background-color: #284203; /* Темно-зелёный цвет */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.player-btn:hover {
+    background-color: #6c824e; /* Более светлый зеленый при наведении */
+}
+
+.player-btn:active {
+    transform: scale(0.95); /* Легкий эффект нажатия */
+}
+
+
+/*___________________________________________/*
+
+
+    /* Контейнер для табов и чата */
+    .tab-and-chat-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+    }
+
+    /* Таб контейнер */
+    .tab-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .chat-container {
+        padding: 0;
+        margin-top: 0;
+    }
+
+    /* Комната чата */
+    .room-info {
+        width: 100%;
+        max-width: 600px; /* Уменьшите максимальную ширину окна чата */
+        height: 400px; /* Уменьшите высоту окна чата */
+        overflow-y: auto;
+        display: none;
+        border-radius: 15px;
+    }
+
+    /* Сообщения в чате */
+    .messages {
+
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.0);
+        font-size: 10px; /* Уменьшите размер шрифта сообщений */
+        padding: 10px; /* Уменьшите отступы внутри чата */
+    }
+
+.custom-btn {
+    background-color: #284203; /* Темно-зелёный цвет фона */
+    color: #ffffff; /* Белый цвет текста */
+    border: 2px solid #1d3002; /* Темный зеленый цвет границы */
+    border-radius: 15px; /* Радиус скругления углов */
+    padding: 5px 10px; /* Внутренние отступы */
+    font-size: 10px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    cursor: pointer; /* Изменение курсора при наведении */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Плавные переходы для фона и эффекта нажатия */
+}
+
+.custom-btn:hover {
+    background-color: #6c824e; /* Более темный зеленый цвет при наведении */
+}
+
+.custom-btn:active {
+    transform: scale(0.95); /* Легкий эффект нажатия */
+}
+
+.custom-btn:focus {
+    outline: none; /* Убираем стандартную обводку при фокусе */
+    box-shadow: 0 0 5px #004d00; /* Добавляем тень при фокусе */
+}
+
+
+
+
+
+.custom-scrollbar {
+    overflow-y: scroll; /* Включаем прокрутку по вертикали */
+}
+
+/* Скрываем scrollbar по умолчанию */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.custom-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Показываем scrollbar при наведении на контейнер */
+.custom-scrollbar:hover::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar:hover {
+    scrollbar-width: thin; /* Firefox */
+}
+
+/* Стили для видимого scrollbar'а */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет ползунка */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+
+
+#toggleNavbar {
+font-size: 10px;
+    position: fixed;
+    top: 90px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #284203; /* Темно-зеленый цвет */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+#toggleNavbar:hover {
+    background-color: #6c824e; /* Светлее при наведении */
+}
+
+
+
+
+
+
+
+
+
+
+.timer-container {
+    padding: 20px;
+    background-color: rgba(255, 0, 0, 0.5); /* Красный фон для теста */
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+#timerDisplay {
+    font-size: 2rem;
+    color: white; /* Белый цвет текста */
+}
+
+#startTimer {
+    margin-top: 10px;
+    background-color: #284203; /* Темно-зеленый цвет */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.break-time {
+    color: #81BECE; /* Пастельно-голубой цвет */
+}
+
+.work-time {
+    color: #E8EDE7; /* Основной цвет для рабочего времени */
+
+
+}
+.timer-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(26, 41, 2, 0.6); /* Полупрозрачный фон */
+    border: 2px solid #6c824e; /* Граница с цветом */
+    border-radius: 45px; /* Скругленные углы */
+    display: inline-block; /* Контейнер не занимает всю ширину */
+    text-align: center; /* Центрирование текста внутри контейнера */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.room-description {
+    width: 100%;
+    max-width: 700px; /* Максимальная ширина для адаптивности */
+    padding: 10px 20px; /* Отступы внутри блока */
+    background-color: rgba(26, 41, 2, 0.4);
+    color: #ffffff; /* Белый цвет текста */
+    border-radius: 10px; /* Скругленные углы */
+    text-align: center; /* Текст по центру */
+    font-size: 0.8rem; /* Размер шрифта */
+
+}
+
+@media (max-width: 768px) {
+    .room-description {
+        width: 90%; /* Адаптивная ширина для маленьких экранов */
+        font-size: 0.7rem; /* Немного уменьшаем размер шрифта на маленьких экранах */
+        right: 10px; /* Уменьшаем отступ справа на маленьких экранах */
+        bottom: 10px; /* Уменьшаем отступ снизу на маленьких экранах */
+    }
+}
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .tab-and-chat-container {
+            align-items: center;
+        }
+
+        .room-info {
+            width: 100%;
+        }
+    }
+
+
+
+
+
+
+.character-name {
+    margin-right: 1rem; /* Отступ между именем и сообщением */
+    color: #444d02;
+    font-size: 1rem; /* Относительный размер шрифта */
+}
+
+.character-popup {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(26, 41, 2, 0.4);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    max-width: 300px;
+    width: calc(100% - 20px); /* Относительная ширина */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.character-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.character-message {
+    color: #1e2402;
+    background-color: rgba(231, 232, 223, 0.9);
+    border-radius: 35px;
+    font-size: 1.25rem; /* Относительный размер шрифта */
+    padding: 10px;
+    text-align: center;
+}
+
+.response-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.response-btn {
+    background-color: #284203;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem; /* Относительный размер шрифта */
+    transition: background-color 0.3s;
+}
+
+.response-btn:hover {
+    background-color: #3b6105;
+}
+
+/* Медиазапросы для различных размеров экрана */
+@media (max-width: 768px) {
+    .character-popup {
+    width: 60%;
+        bottom: 5px;
+        left: 5px;
+        max-width: 95%; /* Максимальная ширина для мобильных устройств */
+        width: calc(100% - 10px); /* Относительная ширина */
+    }
+
+    .character-message {
+        font-size: 1rem; /* Уменьшаем размер шрифта для мобильных */
+        padding: 8px;
+    }
+
+    .response-btn {
+        font-size: 0.875rem; /* Уменьшаем размер шрифта кнопок */
+        padding: 8px 16px;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .character-popup {
+        bottom: 5px;
+        left: 5px;
+        max-width: 100%;
+        width: calc(100% - 10px); /* Заполняем всю ширину экрана */
+    }
+
+    .character-message {
+        font-size: 0.875rem; /* Ещё меньше шрифт для очень маленьких экранов */
+        padding: 6px;
+    }
+
+    .response-btn {
+        font-size: 0.75rem; /* Ещё меньше размер кнопок */
+        padding: 6px 12px;
+    }
+}
+
