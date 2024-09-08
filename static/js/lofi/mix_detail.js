@@ -166,14 +166,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-// Код для работы аудиоплеера
+// Получаем элементы управления
+const volumeRange = document.getElementById('volumeRange');
 const audioPlayer = document.getElementById('audioPlayer');
+
+// Устанавливаем начальное значение громкости на максимум
+audioPlayer.volume = volumeRange.value;
+
+// Обработка изменения громкости
+volumeRange.addEventListener('input', function () {
+    audioPlayer.volume = volumeRange.value; // Устанавливаем значение громкости аудиоплеера
+});
+
+// Код для работы аудиоплеера остается без изменений
 const playPauseBtn = document.getElementById('playPause');
 const playPauseIcon = document.getElementById('playPauseIcon');
 const prevTrackBtn = document.getElementById('prevTrack');
 const nextTrackBtn = document.getElementById('nextTrack');
 const trackTitle = document.getElementById('trackTitle');
+const trackItems = document.querySelectorAll('.track-item');
 
 let currentTrackIndex = 0;
 
@@ -183,10 +194,11 @@ function loadTrack(index) {
         audioPlayer.src = track.url;
         audioPlayer.load();
         audioPlayer.play();
-        playPauseIcon.src = "/static/img/pause.svg"; // Используйте абсолютный путь
-        trackTitle.textContent = track.title;
+        playPauseIcon.src = "/static/img/pause.svg";
+        trackTitle.innerHTML = track.title; // Используем innerHTML для интерпретации HTML-сущностей
     }
 }
+
 
 playPauseBtn.addEventListener('click', function () {
     if (audioPlayer.paused) {
@@ -223,6 +235,18 @@ audioPlayer.addEventListener('ended', function () {
 });
 
 loadTrack(currentTrackIndex);
+
+// Обработчик клика по трекам в выпадающем меню
+trackItems.forEach(item => {
+    item.addEventListener('click', function(event) {
+        event.preventDefault(); // Чтобы избежать перехода по ссылке
+        const trackIndex = parseInt(item.getAttribute('data-track-index')); // Получаем индекс трека
+        currentTrackIndex = trackIndex; // Обновляем текущий индекс трека
+        loadTrack(currentTrackIndex); // Загружаем и воспроизводим трек
+    });
+});
+
+
 
 
 

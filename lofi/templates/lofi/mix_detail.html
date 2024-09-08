@@ -10,27 +10,53 @@
     <button id="toggleNavbar" class="btn btn-primary">Toggle Navbar</button>
 
     <div class="row mt-3">
-        <div class="col-6">
-            <div class="audio-player">
-                <div class="track-info">
-                    <div id="trackTitle" class="track-title">Track 1</div>
+<div class="col-6">
+    <div class="audio-player">
+        <div class="track-info">
+            <div id="trackTitle" class="track-title">Track 1</div>
+        </div>
+
+        <!-- Контролы плеера -->
+        <div class="player-controls">
+            <button id="prevTrack" class="btn player-btn">
+                <img src="{% static 'img/rewind.svg' %}" alt="Rewind" class="control-icon">
+            </button>
+            <button id="playPause" class="btn player-btn">
+                <img id="playPauseIcon" src="{% static 'img/play.svg' %}" alt="Play" class="control-icon">
+            </button>
+            <button id="nextTrack" class="btn player-btn">
+                <img src="{% static 'img/forward.svg' %}" alt="Forward" class="control-icon">
+            </button>
+        </div>
+
+        <!-- Выпадающее меню для выбора трека -->
+        <div class="d-flex align-items-center mt-3">
+            <div class="dropdown me-3">
+                <button class="btn dropdown-toggle track-dropdown-btn" type="button" id="trackDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{% static 'img/list.svg' %}" alt="Иконка выбора трека" width="24" height="24">
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="trackDropdownMenu" id="trackList">
+                    {% for audio in audios %}
+                    <li><a class="dropdown-item track-item" href="#" data-track-index="{{ forloop.counter0 }}">{{ audio.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Регулятор громкости -->
+            <div class="d-flex align-items-center">
+                <div class="volume-control mt-3">
+                    <input type="range" id="volumeRange" class="volume-range" min="0" max="1" step="0.01" value="1">
                 </div>
-                <div class="player-controls">
-                    <button id="prevTrack" class="btn player-btn">
-                        <img src="{% static 'img/rewind.svg' %}" alt="Rewind" class="control-icon">
-                    </button>
-                    <button id="playPause" class="btn player-btn">
-                        <img id="playPauseIcon" src="{% static 'img/play.svg' %}" alt="Play" class="control-icon">
-                    </button>
-                    <button id="nextTrack" class="btn player-btn">
-                        <img src="{% static 'img/forward.svg' %}" alt="Forward" class="control-icon">
-                    </button>
-                </div>
+
                 <audio id="audioPlayer" class="audio-element">
                     Your browser does not support the audio element.
                 </audio>
             </div>
         </div>
+    </div>
+</div>
+
         <div class="col-6">
             <div class="timer-container text-center">
                 <h2 id="timerDisplay" class="work-time">30:00</h2>

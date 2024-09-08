@@ -4,17 +4,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-            background-color: rgba(26, 41, 2, 0.4);
+    background-color: rgba(26, 41, 2, 0.4);
     padding: 20px;
     border-radius: 40px;
-
     width: 100%;
     max-width: 270px;
-    margin: 20px auto; /* Центрирование на странице */
+    margin: 20px auto;
 }
 
 .track-info {
-
+    margin-bottom: 10px;
 }
 
 .track-title {
@@ -51,6 +50,129 @@
 .player-btn:active {
     transform: scale(0.95); /* Легкий эффект нажатия */
 }
+
+/* Стили для выпадающего меню треков */
+.track-dropdown-btn {
+    background-color: #284203;
+    color: #dcebc7;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.track-dropdown-btn:hover {
+    background-color: #6c824e;
+}
+
+/* Выпадающее меню: уменьшенная высота и добавление прокрутки */
+.dropdown-menu {
+    background-color: #2b3a1a;
+    border-radius: 8px;
+    max-height: 200px; /* Ограничение по высоте */
+    overflow-y: auto;  /* Добавляем вертикальную прокрутку */
+    padding: 5px; /* Уменьшаем отступы внутри меню */
+}
+
+/* Стили для элементов трека в выпадающем меню */
+.track-item {
+    color: #dcebc7;
+    padding: 5px 10px; /* Уменьшение отступов внутри элементов */
+    font-size: 14px;   /* Уменьшение шрифта */
+    transition: background-color 0.3s ease;
+}
+
+.track-item:hover {
+    background-color: #6c824e;
+    color: #ffffff;
+}
+
+/* Стили для полосы прокрутки (необязательно, если требуется стилизовать) */
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #6c824e;
+    border-radius: 4px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background-color: #5a7042;
+}
+
+
+/* Стили для регулятора громкости */
+/* Стили для регулятора громкости */
+.volume-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.volume-label {
+        color: #dcebc7;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.volume-range {
+    width: 100px;
+    appearance: none; /* Убираем стандартный стиль браузера */
+    background-color: #c6d4b4; /* Цвет заднего плана трека */
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Стилизация бегунка для браузеров на основе Webkit (Chrome, Safari) */
+.volume-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #587530; /* Цвет ползунка */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.volume-range::-webkit-slider-thumb:hover {
+    background-color: #587530; /* Цвет ползунка при наведении */
+}
+
+/* Стилизация бегунка для браузеров на основе Gecko (Firefox) */
+.volume-range::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #587530; /* Цвет ползунка */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.volume-range::-moz-range-thumb:hover {
+    background-color: #587530; /* Цвет ползунка при наведении */
+}
+
+/* Для IE и Edge */
+.volume-range::-ms-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #587530; /* Цвет ползунка */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.volume-range::-ms-thumb:hover {
+    background-color: #587530; /* Цвет ползунка при наведении */
+}
+
+
 
 
 /*___________________________________________/*
